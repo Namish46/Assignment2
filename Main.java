@@ -18,6 +18,7 @@ public class Main {
             System.out.println("2.Get Top 10 Movies");
             System.out.println("3.Get Movies by Genere");
             System.out.println("4.Get Movies by Directors");
+            System.out.println("5.Get Movies by Realease Year");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -25,9 +26,15 @@ public class Main {
             if(choice==0) break;
             switch(choice) {
                 case 1:getMovieInformation(sc);
+                break;
                 case 2:getTop10Movies();
+                break;
                 case 3:getMoviesByGenre(sc);
+                break;
                 case 4:getMoviesByDirector(sc);
+                break;
+                case 5:getMoviesByYear(sc);
+                break;
                 default:System.out.println("Invalid choice");
             }
         }
@@ -162,7 +169,7 @@ public static void getMoviesByGenre(Scanner sc){
     }
 }
 //Get Movies By Directors
-static void getMoviesByDirector(Scanner sc){
+public static void getMoviesByDirector(Scanner sc){
     System.out.print("Enter director name: ");
     String name=sc.nextLine().trim();
     int directorId=-1;
@@ -183,4 +190,20 @@ static void getMoviesByDirector(Scanner sc){
             found=true;
         }
     }
+}
+//Get Movies By Release Year
+public static void getMoviesByYear(Scanner sc){
+    System.out.print("Enter release year: ");
+    int year=sc.nextInt();
+    boolean found=false;
+    for(int i=0;i<movies.size();i++){
+        if(movies.get(i).releaseYear==year){
+            System.out.println(movies.get(i).title);
+            found=true;
+        }
+    }
+    if(!found)
+        System.out.println("No movies found for year: "+year);
+}
+
 }
