@@ -15,6 +15,7 @@ public class Main {
         while (true) {
             System.out.println("----- Movie Data System -----");
             System.out.println("1.Get Movie Info");
+            System.out.println("2.Get Top 10 Movies");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -22,6 +23,7 @@ public class Main {
             if(choice==0) break;
             switch(choice) {
                 case 1:getMovieInformation(sc);
+                case 2:getTop10Movies();
                 default:System.out.println("Invalid choice");
             }
         }
@@ -119,4 +121,26 @@ public class Main {
             System.out.print(a.name+"("+a.nationality+"),");
         }
     }
+    //Get Top 10 rated movies
+    public static void getTop10Movies() {
+    // Make a copy of movies 
+    ArrayList<Movie> temp = new ArrayList<>();
+    for (int i=0;i<movies.size();i++) {
+        temp.add(movies.get(i));
+    }
+    for (int i=0;i<temp.size()-1;i++) {
+        for (int j=0;j<temp.size()-i-1;j++) {
+            if (temp.get(j).rating<temp.get(j+1).rating) {
+                Movie t =temp.get(j);
+                temp.set(j,temp.get(j+1));
+                temp.set(j+1,t);
+            }
+        }
+    }
+    System.out.println("Top 10 Rated Movies");
+    for (int i=0;i<10 && i<temp.size();i++) {
+        System.out.println((i+1)+"."+temp.get(i).title +"- Rating:" +temp.get(i).rating);
+    }
+}
+
 }
