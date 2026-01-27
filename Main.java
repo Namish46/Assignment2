@@ -17,6 +17,7 @@ public class Main {
             System.out.println("1.Get Movie Info");
             System.out.println("2.Get Top 10 Movies");
             System.out.println("3.Get Movies by Genere");
+            System.out.println("4.Get Movies by Directors");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -26,6 +27,7 @@ public class Main {
                 case 1:getMovieInformation(sc);
                 case 2:getTop10Movies();
                 case 3:getMoviesByGenre(sc);
+                case 4:getMoviesByDirector(sc);
                 default:System.out.println("Invalid choice");
             }
         }
@@ -159,6 +161,26 @@ public static void getMoviesByGenre(Scanner sc){
         System.out.println("No movies found for genre: "+genre);
     }
 }
-
-
+//Get Movies By Directors
+static void getMoviesByDirector(Scanner sc){
+    System.out.print("Enter director name: ");
+    String name=sc.nextLine().trim();
+    int directorId=-1;
+    for(int i=0;i<directors.size();i++){
+        if(directors.get(i).name.trim().equalsIgnoreCase(name)){
+            directorId=directors.get(i).id;
+            break;
+        }
+    }
+    if(directorId==-1){
+        System.out.println("Director not found");
+        return;
+    }
+    boolean found=false;
+    for(int i=0;i<movies.size();i++){
+        if(movies.get(i).directorId==directorId){
+            System.out.println(movies.get(i).title);
+            found=true;
+        }
+    }
 }
