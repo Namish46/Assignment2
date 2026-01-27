@@ -16,6 +16,7 @@ public class Main {
             System.out.println("----- Movie Data System -----");
             System.out.println("1.Get Movie Info");
             System.out.println("2.Get Top 10 Movies");
+            System.out.println("3.Get Movies by Genere");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -24,6 +25,7 @@ public class Main {
             switch(choice) {
                 case 1:getMovieInformation(sc);
                 case 2:getTop10Movies();
+                case 3:getMoviesByGenre(sc);
                 default:System.out.println("Invalid choice");
             }
         }
@@ -142,5 +144,21 @@ public class Main {
         System.out.println((i+1)+"."+temp.get(i).title +"- Rating:" +temp.get(i).rating);
     }
 }
+//Get Movie by Genere
+public static void getMoviesByGenre(Scanner sc){
+    System.out.print("Enter genre: ");
+    String genre=sc.nextLine();
+    boolean found=false;
+    for(int i=0;i<movies.size();i++){
+        if(movies.get(i).genre.equalsIgnoreCase(genre)){
+            System.out.println(movies.get(i).title);
+            found=true;
+        }
+    }
+    if(!found){
+        System.out.println("No movies found for genre: "+genre);
+    }
+}
+
 
 }
