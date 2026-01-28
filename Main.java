@@ -24,11 +24,13 @@ public class Main {
             System.out.println("8.Update Movie Rating");
             System.out.println("9.Delete Movie");
             System.out.println("10.Top 10 movies by year");
-            System.out.println("11.Exit");
+            System.out.println("11.Get Directors with the Most Movies ");
+            System.out.println("12.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
             sc.nextLine();
-            if(choice==11) break;
+            //Exit Feature
+            if(choice==12) break;
             switch(choice) {
                 case 1:getMovieInformation(sc);
                 break;
@@ -49,6 +51,8 @@ public class Main {
                 case 9:deleteMovie(sc);
                 break;
                 case 10:top15MoviesByYear();
+                break;
+                case 11:top5DirectorsMostMovies();
                 break;
                 default:System.out.println("Invalid choice");
             }
@@ -312,6 +316,32 @@ public static void top15MoviesByYear(){
     for(int i=0;i<15 && i<temp.size();i++){
         Movie m=temp.get(i);
         System.out.println(m.id+m.title+m.releaseYear+m.genre+m.rating);
+    }
+}
+//Top 5 Directors MostMovies
+    public static void top5DirectorsMostMovies(){
+    int[] count=new int[directors.size()];
+    for(int i=0;i<movies.size();i++){
+        for(int j=0;j<directors.size();j++){
+            if(movies.get(i).directorId==directors.get(j).id){
+                count[j]++;
+            }
+        }
+    }
+    for(int i=0;i<directors.size()-1;i++){
+        for(int j=i+1;j<directors.size();j++){
+            if(count[j]>count[i]){
+                int t=count[i];
+                count[i]=count[j];
+                count[j]=t;
+                Director d=directors.get(i);
+                directors.set(i,directors.get(j));
+                directors.set(j,d);
+            }
+        }
+    }
+    for(int i=0;i<5 && i<directors.size();i++){
+        System.out.println(directors.get(i).name+" "+count[i]);
     }
 }
 }
