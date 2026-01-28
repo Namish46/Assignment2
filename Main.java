@@ -22,7 +22,8 @@ public class Main {
             System.out.println("6.Get Movies by Year Range");
             System.out.println("7.Add New Movie");
             System.out.println("8.Update Movie Rating");
-            System.out.println("9.Delet Movie");
+            System.out.println("9.Delete Movie");
+            System.out.println("10.Top 10 movies by year");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -46,6 +47,8 @@ public class Main {
                 case 8:updateMovieRating(sc);
                 break;
                 case 9:deleteMovie(sc);
+                break;
+                case 10:top15MoviesByYear();
                 break;
                 default:System.out.println("Invalid choice");
             }
@@ -290,5 +293,25 @@ public static void deleteMovie(Scanner sc){
     }
     if(!found)
         System.out.println("Movie not found");
+}
+//Top 15 Movies By year
+public static void top15MoviesByYear(){
+    ArrayList<Movie> temp=new ArrayList<>();
+    for(int i=0;i<movies.size();i++){
+        temp.add(movies.get(i));
+    }
+    for(int i=0;i<temp.size()-1;i++){
+        for(int j=0;j<temp.size()-i-1;j++){
+            if(temp.get(j).releaseYear>temp.get(j+1).releaseYear){
+                Movie t=temp.get(j);
+                temp.set(j,temp.get(j+1));
+                temp.set(j+1,t);
+            }
+        }
+    }
+    for(int i=0;i<15 && i<temp.size();i++){
+        Movie m=temp.get(i);
+        System.out.println(m.id+m.title+m.releaseYear+m.genre+m.rating);
+    }
 }
 }
