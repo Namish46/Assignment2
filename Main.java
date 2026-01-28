@@ -21,6 +21,7 @@ public class Main {
             System.out.println("5.Get Movies by Realease Year");
             System.out.println("6.Get Movies by Year Range");
             System.out.println("7.Add New Movie");
+            System.out.println("8.Update Movie Rating");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -40,6 +41,8 @@ public class Main {
                 case 6:getMoviesByYearRange(sc);
                 break;
                 case 7:addNewMovie(sc);
+                break;
+                case 8:updateMovieRating(sc);
                 break;
                 default:System.out.println("Invalid choice");
             }
@@ -249,4 +252,25 @@ public static void getMoviesByYearRange(Scanner sc){
         movies.add(new Movie(id,title,year,genre,rating,directorId));
         System.out.println("Movie added!");
     }
+
+    //Update movie rating
+    public static void updateMovieRating(Scanner sc){
+    System.out.print("Enter movie id: "); 
+    int id=sc.nextInt(); 
+    sc.nextLine();
+    System.out.print("Enter new rating: "); 
+    double rating=sc.nextDouble(); 
+    sc.nextLine();
+    boolean found=false;
+    for(int i=0;i<movies.size();i++){
+        if(movies.get(i).id==id){movies.get(i).rating=rating; 
+        found=true; 
+        System.out.println("Rating updated!"); 
+        break;
+        }
+    }
+    if(!found){
+    System.out.println("Movie not found");
+}}
+
 }
