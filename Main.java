@@ -25,12 +25,13 @@ public class Main {
             System.out.println("9.Delete Movie");
             System.out.println("10.Top 10 movies by year");
             System.out.println("11.Get Directors with the Most Movies ");
-            System.out.println("12.Exit");
+            System.out.println("12.Actors worked in Multiple movies");
+            System.out.println("13.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
             sc.nextLine();
             //Exit Feature
-            if(choice==12) break;
+            if(choice==13) break;
             switch(choice) {
                 case 1:getMovieInformation(sc);
                 break;
@@ -53,6 +54,8 @@ public class Main {
                 case 10:top15MoviesByYear();
                 break;
                 case 11:top5DirectorsMostMovies();
+                break;
+                case 12:actorWorkedInMostMovies();
                 break;
                 default:System.out.println("Invalid choice");
             }
@@ -344,4 +347,25 @@ public static void top15MoviesByYear(){
         System.out.println(directors.get(i).name+" "+count[i]);
     }
 }
+//Actors worked in multiple movies
+public static void actorWorkedInMostMovies(){
+    int max=0;
+    String actorName="";
+    String nationality="";
+    for(int i=0;i<actors.size();i++){
+        int count=0;
+        for(int j=0;j<actors.size();j++){
+            if(actors.get(i).name.equalsIgnoreCase(actors.get(j).name)){
+                count++;
+            }
+        }
+        if(count>max){
+            max=count;
+            actorName=actors.get(i).name;
+            nationality=actors.get(i).nationality;
+        }
+    }
+    System.out.println(actorName+" "+nationality+" "+max);
+}
+
 }
