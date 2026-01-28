@@ -24,11 +24,11 @@ public class Main {
             System.out.println("8.Update Movie Rating");
             System.out.println("9.Delete Movie");
             System.out.println("10.Top 10 movies by year");
-            System.out.println("0.Exit");
+            System.out.println("11.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
             sc.nextLine();
-            if(choice==0) break;
+            if(choice==11) break;
             switch(choice) {
                 case 1:getMovieInformation(sc);
                 break;
