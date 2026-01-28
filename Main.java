@@ -19,6 +19,8 @@ public class Main {
             System.out.println("3.Get Movies by Genere");
             System.out.println("4.Get Movies by Directors");
             System.out.println("5.Get Movies by Realease Year");
+            System.out.println("6.Get Movies by Year Range");
+            System.out.println("7.Add New Movie");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -34,6 +36,10 @@ public class Main {
                 case 4:getMoviesByDirector(sc);
                 break;
                 case 5:getMoviesByYear(sc);
+                break;
+                case 6:getMoviesByYearRange(sc);
+                break;
+                case 7:addNewMovie(sc);
                 break;
                 default:System.out.println("Invalid choice");
             }
@@ -204,6 +210,43 @@ public static void getMoviesByYear(Scanner sc){
     }
     if(!found)
         System.out.println("No movies found for year: "+year);
-}
-
+}   
+//Get Movies by year Range
+public static void getMoviesByYearRange(Scanner sc){
+        System.out.print("Enter start year: ");
+        int start=sc.nextInt();
+        System.out.print("Enter end year: ");
+        int end=sc.nextInt();
+        boolean found=false;
+        for(int i=0;i<movies.size();i++){
+            int y=movies.get(i).releaseYear;
+            if(y>=start && y<=end){
+                System.out.println(movies.get(i).title);
+                found=true;
+            }
+        }
+        if(!found)
+            System.out.println("No movies found between "+start+" and "+end);
+    }
+    //Add New Movie
+    public static void addNewMovie(Scanner sc){
+        System.out.print("Enter movie id: ");
+        int id=sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter title: ");
+        String title=sc.nextLine();
+        System.out.print("Enter release year: ");
+        int year=sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter genre: ");
+        String genre=sc.nextLine();
+        System.out.print("Enter rating: ");
+        double rating=sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Enter director id: ");
+        int directorId=sc.nextInt();
+        sc.nextLine();
+        movies.add(new Movie(id,title,year,genre,rating,directorId));
+        System.out.println("Movie added!");
+    }
 }
