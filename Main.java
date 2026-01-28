@@ -22,6 +22,7 @@ public class Main {
             System.out.println("6.Get Movies by Year Range");
             System.out.println("7.Add New Movie");
             System.out.println("8.Update Movie Rating");
+            System.out.println("9.Delet Movie");
             System.out.println("0.Exit");
             System.out.print("Enter choice:");
             int choice =sc.nextInt();
@@ -43,6 +44,8 @@ public class Main {
                 case 7:addNewMovie(sc);
                 break;
                 case 8:updateMovieRating(sc);
+                break;
+                case 9:deleteMovie(sc);
                 break;
                 default:System.out.println("Invalid choice");
             }
@@ -272,5 +275,20 @@ public static void getMoviesByYearRange(Scanner sc){
     if(!found){
     System.out.println("Movie not found");
 }}
-
+//Delete Movie
+public static void deleteMovie(Scanner sc){
+    System.out.print("Enter movie id: ");
+    int id = sc.nextInt(); sc.nextLine();
+    boolean found = false;
+    for(int i=0;i<movies.size(); i++){
+        if(movies.get(i).id == id){
+            movies.remove(i);
+            found = true;
+            System.out.println("Movie deleted!");
+            break;
+        }
+    }
+    if(!found)
+        System.out.println("Movie not found");
+}
 }
